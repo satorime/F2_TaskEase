@@ -1,0 +1,264 @@
+/* ============ About Us ============ */
+
+body {
+    font-family: Arial;
+    background-image: linear-gradient(to bottom, #f7d8b9 50%, #43161a);
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div {
+	//border: 1px solid black;
+	margin: 0px;
+}
+
+.page-header {	
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+	width: 70vw;
+	border: 0.5 solid rgba(245, 245, 220);
+	border-radius: 50px;
+	background-color: white;
+	box-shadow: 0 0 13px 3px rgb(67, 22, 26, 0.5);
+	margin-bottom: 40px;
+}
+
+.header-logo img{
+	height: 4.5vw;
+}
+
+.header-logo-name {
+	width: 16vw;
+	height: 5.5vw;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin-right: 10px;
+}
+
+.name-upper-text span{
+	font-family: 'Syncopate', sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	letter-spacing: 4px;
+	user-select: none;
+}
+
+.name-lower-text {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	margin-top: -1px;
+	user-select: none;
+}
+
+.name-lower-text span {
+	letter-spacing: 7.5px;
+}
+
+.header-anchors {
+    width: 130px;
+    text-align: center;
+    height: 5.5vw;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-anchors:hover {
+    background-color: #43161a;
+}
+
+.header-anchors span,
+.header-anchors a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+	user-select: none;
+}
+
+.header-anchors:hover span,
+.header-anchors:hover a {
+    color: #f5f5dc;
+}
+
+/* Report CSS */
+
+.aboutus-body {
+	display: flex;
+    justify-content: center;
+	flex-direction: row;
+    align-items: center;
+	margin-top: 20px;
+}
+
+.aboutus-content {
+	display: flex;
+    justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.aboutus-content {
+	width: 50vw;
+	height: 55vh;
+	display: flex;
+	justify-content: center;
+}
+
+.aboutus-img-content {
+	width: 5vw;
+	height: 55vh;
+	display: flex;
+	justify-content: center;
+}
+
+.content-header {
+	font-weight: bold;
+	font-size: 30px;
+	font-family: 'Syncopate', sans-serif;
+	margin-bottom: 15px;
+	letter-spacing: 2px;
+}
+
+.content-text {
+	text-align: justify;
+	font-size: 18px;
+	letter-spacing: 1px;
+	width: 70vw;
+}
+
+.aboutus-img-content img{
+	width: 25vw;
+}
+
+.addtask button{
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	background-color: white;
+	border-radius: 20px;
+	font-weight: bold;
+	margin-right: 20px;
+	margin-top: 30px;
+}
+
+table, tr, td {
+	border: 1px solid black;
+}
+
+.createTable {
+	width: 70vw;
+	
+}
+
+.createTable tr{
+	height: 4vw;
+	
+}
+
+.tableheader {
+	background-color: black;
+	color: white;
+	font-weight: bold;
+}
+
+.createTable td{
+	text-align: center;
+}
+
+.rowfunc {
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	flex-direction: row;
+}
+
+.headertask {
+	width: 50vw;
+	margin-top: 100px;
+}
+
+.headername {
+	font-weight: bold;
+	font-size: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.addtaskright {
+	flex-direction: column;
+	margin-top: 30px;
+	margin-bottom: 100px;
+}
+
+.addingtask {
+	margin-left: 150px;
+	width: 500px;
+	margin-top: 100px;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-weight: bold;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 0 0 13px 3px rgb(67, 22, 26, 0.5);
+}
+
+.alltask-container {
+	padding: 20px;
+	border-radius: 40px;
+	background-color: white;
+	box-shadow: 0 0 13px 3px rgb(67, 22, 26, 0.5);
+	margin-bottom: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.syntax {
+	padding: 0px 20px 10px 20px;
+	border-radius: 40px;
+	background-color: white;
+	box-shadow: 0 0 13px 1px rgb(67, 22, 26, 0.4);
+	margin-top: 40px;
+	max-width: 67vw;
+	min-width: 67vw;
+	font-size: 22px;
+}
+
+.syntax-header {
+	padding: 10px 20px 10px 20px;
+	border-radius: 40px;
+	background-color: grey;
+	box-shadow: 0 0 13px 1px rgb(67, 22, 26, 0.4);
+	max-width: 8vw;
+	min-width: 8vw;
+	font-size: 22px;
+	color: white;
+	font-weight: bold;
+	letter-spacing: 2px;
+	margin-top: -30px;
+	margin-left: 54vw;
+	text-align: center;
+}
+

@@ -1,0 +1,236 @@
+/* ============ Log In ============ */
+
+body {
+    font-family: Arial;
+    background-image: linear-gradient(to bottom, #f7d8b9 50%, #43161a);
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div {
+	//border: 1px solid black;
+	margin: 0px;
+}
+
+.page-header {	
+    position: fixed;
+    top: 30px;
+    left: 30px;
+	display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-home {
+	display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 25vw;
+    border: 0.5 solid rgba(245, 245, 220);
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 0 0 13px 3px rgba(67, 22, 26, 0.5);
+}
+
+.header-logo img{
+	height: 4.5vw;
+}
+
+.header-logo-name {
+	width: 16vw;
+	height: 5.2vw;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin-right: 10px;
+}
+
+.name-upper-text span{
+	font-family: 'Syncopate', sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	letter-spacing: 4px;
+	user-select: none;
+}
+
+.name-lower-text {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	margin-top: -1px;
+	user-select: none;
+}
+
+.name-lower-text span {
+	letter-spacing: 7.5px;
+}
+
+.header-identifier {
+	background-color: #43161a;
+	color: white;
+	margin-left: -30px;
+	position: relative;
+	border-radius: 9px;
+    z-index: -1;
+	width: 190px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-identifier span {
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	margin-left: 25px;
+	user-select: none;
+	transition: opacity 0.1s ease;
+	padding: 15px;
+}
+
+.header-identifier:hover {
+	transform: scale(1.1); 
+	transition: transform 0.7s ease; 
+}
+
+.header-identifier span:hover {
+	opacity: 0;
+}
+
+.header-identifier.image {
+	background-image: url('../images/back.png'); 
+	background-size: 20px 20px; 
+	background-repeat: no-repeat;
+	background-position: calc(100% - 50px) center;
+}
+
+/* Login Body */
+
+.login-body{
+	width: 850px;
+	margin-top: 175px;
+	background: #ffffff;
+	border-radius: 30px;
+	height: 450px;
+	box-shadow: 0 0 13px 3px rgba(67, 22, 26, 0.5);
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+}
+
+.login-body-content {
+	width: 400px;
+	margin-left: -10px;
+	margin-right: 15px;
+}
+
+.header-welcome {
+	font-family: Arial;
+	font-size: 50px;
+	font-weight: bold;
+	color: #43161a;
+}
+.header-text {
+	font-family: 'Roboto', sans-serif;
+	font-size: 13px;
+	letter-spacing: 2px;
+	color: gray;
+}
+
+.login-body .content-header{
+	user-select: none;
+}
+
+.login-body form{
+	padding: 10px 30px 50px 30px;
+	margin-top: 10px;
+}
+
+.login-body form .field{
+	height: 50px;
+	width: 100%;
+	margin-top: 20px;
+	position: relative;
+}
+
+.login-body form .field input{
+	height: 100%;
+	width: 100%;
+	outline: none;
+	font-size: 17px;
+	padding-left: 20px;
+	border: 1px solid lightgrey;
+	border-radius: 25px;
+	transition: all 0.3s ease;
+}
+
+.login-body form .field input:focus,
+form .field input:valid{
+	border-color: #43161a;
+}
+
+.login-body form .field label{
+	position: absolute;
+	top: 50%;
+	left: 20px;
+	color: #999999;
+	font-weight: 400;
+	font-size: 17px;
+	pointer-events: none;
+	transform: translateY(-50%);
+	transition: all 0.3s ease;
+}
+
+form .field input:focus ~ label,
+form .field input:valid ~ label{
+	top: 0%;
+	font-size: 16px;
+	color: #43161a;
+	background: #fff;
+	transform: translateY(-50%);
+}
+
+form .field input[type="submit"]{
+	color: #fff;
+	border: none;
+	padding-left: 0;
+	font-size: 20px;
+	font-weight: 500;
+	cursor: pointer;
+	background-color: #43161a;
+	transition: all 0.3s ease;
+}
+
+form .field input[type="submit"]:active{
+	transform: scale(0.90);
+}
+
+form .signup-link{
+	color: #262626;
+	margin-top: 20px;
+	text-align: center;
+	margin-bottom: -60px;
+}
+
+form .signup-link a{
+	color: #4158d0;
+	text-decoration: none;
+}
+
+form .signup-link a:hover{
+	text-decoration: underline;
+}
+
+.login-body-img img{
+	width: 400px;
+	border-radius: 30px;
+	box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
+}

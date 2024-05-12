@@ -1,0 +1,155 @@
+/* ============ About Us ============ */
+
+body {
+    font-family: Arial;
+    background-image: linear-gradient(to bottom, #f7d8b9 50%, #43161a);
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+div {
+	//border: 1px solid black;
+	margin: 0px;
+}
+
+.page-header {	
+    position: fixed;
+    top: 30px;
+    left: 30px;
+	display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-home {
+	display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 25vw;
+    border: 0.5 solid rgba(245, 245, 220);
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 0 0 13px 3px rgba(67, 22, 26, 0.5);
+}
+
+.header-logo img{
+	height: 4.5vw;
+}
+
+.header-logo-name {
+	width: 16vw;
+	height: 5.2vw;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin-right: 10px;
+}
+
+.name-upper-text span{
+	font-family: 'Syncopate', sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	letter-spacing: 4px;
+	user-select: none;
+}
+
+.name-lower-text {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	margin-top: -1px;
+	user-select: none;
+}
+
+.name-lower-text span {
+	letter-spacing: 7.5px;
+}
+
+.header-identifier {
+	background-color: #43161a;
+	color: white;
+	margin-left: -30px;
+	position: relative;
+	border-radius: 9px;
+    z-index: -1;
+	width: 190px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.header-identifier span {
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	margin-left: 25px;
+	user-select: none;
+	transition: opacity 0.1s ease;
+	padding: 15px;
+}
+
+.header-identifier:hover {
+	transform: scale(1.1); 
+	transition: transform 0.7s ease; 
+}
+
+.header-identifier span:hover {
+	opacity: 0;
+}
+
+.header-identifier.image {
+	background-image: url('../images/back.png'); 
+	background-size: 20px 20px; 
+	background-repeat: no-repeat;
+	background-position: calc(100% - 50px) center;
+}
+
+/* About Us Body */
+
+.aboutus-body {
+	display: flex;
+    justify-content: center;
+	flex-direction: row;
+    align-items: center;
+	margin-top: 140px;
+}
+
+.aboutus-content {
+	display: flex;
+    justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-right: 40px;
+}
+
+.aboutus-content, 
+.aboutus-img-content {
+	width: 30vw;
+	height: 55vh;
+	display: flex;
+	justify-content: center;
+}
+
+.content-header {
+	font-weight: bold;
+	font-size: 30px;
+	font-family: 'Syncopate', sans-serif;
+	margin-bottom: 15px;
+	letter-spacing: 2px;
+}
+
+.content-text {
+	text-align: justify;
+	font-size: 18px;
+	letter-spacing: 1px;
+}
+
+.aboutus-img-content img{
+	width: 25vw;
+}
