@@ -1,4 +1,4 @@
-/* ============ Dashboard ============ */
+    /* ============ Dashboard ============ */
 
 body {
     font-family: Arial;
@@ -13,20 +13,20 @@ body {
     padding: 0;
 }
 
-div {
-    //border: 1px solid black;
+/* div {
+    border: 1px solid black;
 }
 
 table {
-    //border: 1px solid purple;
+    border: 1px solid purple;
 }
 
 tr {
-    //border: 1px solid blue;
+    border: 1px solid blue;
 }
 
 td {
-    //border: 1px solid gray;
+    border: 1px solid gray;
 }
 
 img {
@@ -39,7 +39,7 @@ span {
 
 a {
     //border: 1px solid yellow;
-}
+} */
 
 .page-header {
     position: fixed;
@@ -418,7 +418,6 @@ form .field input[type="submit"] {
 .lower-header {
     display: flex;
     align-items: center;
-    ;
     flex-direction: row;
     width: auto;
 }

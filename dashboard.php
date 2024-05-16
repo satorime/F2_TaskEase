@@ -1,5 +1,5 @@
 <?php
-    include 'connect.php';
+    include 'connect.php';   
 ?>
  
 <html>
@@ -11,7 +11,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         
-		<link rel="stylesheet" href="css/dashboard.css">
+		<link rel="stylesheet" href="css/dashboard1.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap">
         <script src="js/redirect-pages.js"></script>
         <script src="js/format-pages.js" defer></script>
@@ -133,9 +133,10 @@
 					<a class="close" href="#">&times;</a>
 					<div class="add-content">
 						<form action="#" method="post">							
-							<!-- <div class="status" id="statuschange">
+							<div class="status" id="statuschange" name="createStatus">
 								<img src="images/starhollow.png" id="statusImage" onclick="changeImage()">
-							</div> -->
+								<input type="hidden" id="importantInput" name="important" value="0">
+							</div>
 
 							<div class="field">
 								<input type="text" name="taskname" required>
@@ -206,21 +207,21 @@
 					<?php
 						$sql = "SELECT * FROM tbltask ORDER BY taskdate ASC";
 						$result = mysqli_query($connection, $sql);
-						$count = 0; // Initialize a counter
-
+						$count = 0;
+						
 						if (mysqli_num_rows($result) > 0) {
 							while($row = mysqli_fetch_assoc($result)) {
-								$count++;
+                                $taskname=$row['taskname'];
 								if ($count % 4 == 0) {
 									echo "<br>";
 								}
 					?>
-								<div class="task-table">
-									<div class="task-format">
-										<div class="task-name"><?php echo $row["taskname"]; ?></div>
-										<div class="task-desc"><?php echo $row["taskdescription"]; ?></div>
-										<div class="task-date"><?php echo $row["taskdate"]; ?></div>
-										<div class="task-button">
+								<table class="task-table">
+									<tr class="task-format">
+										<td class="task-name"><?php echo $row["taskname"]; ?></td>
+										<td class="task-desc"><?php echo $row["taskdescription"]; ?></td>
+										<td class="task-date"><?php echo $row["taskdate"]; ?></td>
+										<td class="task-button">
 											<a class="view-button" href="#popup4">
 												<button class="func-button" onclick="viewTask('<?php echo $row["taskname"]; ?>')">View</button>
 											</a>
@@ -232,9 +233,108 @@
 													<a class="close" href="#">&times;</a>
 													<div class="add-content">
 														<form action="#" method="post">
-															<input type="hidden" name="taskname" value="<?php echo $row["taskname"]; ?>">
+															<input type="hidden" name="taskID" value="<?php echo $row["taskID"]; ?>">
+															
 															<div class="status" id="statuschange">
 																<img src="images/starhollow.png" id="statusImage" onclick="changeImage()">
+															</div>
+															
+															<div class="field">
+																<input type="text" name="taskname" value="<?php echo $row["taskname"]; ?>" required>
+																<label>Task Name</label>
+															</div>
+
+															<div class="field">
+																<input type="text" name="taskdate" value="<?php echo $row["taskdate"]; ?>" required>
+																<label>Date of Completion</label>
+															</div>
+
+															<div class="desc-field">
+																<input type="text" name="taskdescription" value="<?php echo $row["taskdescription"]; ?>" required>
+																<label>Task Description</label>
+															</div>
+
+															<div class="field">
+																<input type="submit" value="UPDATE" name="btnUpdate" onclick="if (!confirm('Are you sure?')) { return false }">
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+															
+											<a href="delete-task.php?taskName=<?php echo urlencode($row["taskname"]);?>" class="func-button" onclick="if (!confirm('Are you sure?')) { return false }">
+												<button class="func-button"> Delete </button>
+											</a>
+										</td>
+									</tr>
+								</table>
+					<?php
+								
+							}
+						} else {
+					?>
+							<div>
+								<img src="images/notasks.png">
+							</div>
+							<div>
+								<span> There are currently no newly created task/s as of the moment. </span>
+							</div>
+					<?php
+						}
+					?>
+
+					</div>
+                </div>
+                   
+                <input type="radio" id="important-tab" name="sec-a">
+                <label for="important-tab" class="section-important">
+                    <div>
+                        <img src="images/important.png">
+                    </div>
+                       
+                    <div>
+                        <span> Important Tasks </span>
+                    </div>
+                </label>
+                <div class="all-content">
+                    <div class="section-header">
+                        <h2> IMPORTANT TASKS </h2>
+                        <h5> Sorted by: Newest to Oldest </h5>
+                    </div>
+                    <hr/>
+                    <div class="no-alltasks">
+                    <?php
+						$sql = "SELECT * FROM tbltask where isimportant =1 ORDER BY taskdate ASC";
+						$result = mysqli_query($connection, $sql);
+						$count = 0; // Initialize a counter
+
+						if (mysqli_num_rows($result) > 0) {
+							while($row = mysqli_fetch_assoc($result)) {
+                                $taskname=$row['taskname'];
+								$count++;
+								if ($count % 4 == 0) {
+									echo "<br>";
+								}
+					?>
+								<div class="task-table">
+									<div class="task-format">
+										<div class="task-name"><?php echo $row["taskname"]; ?></div>
+										<div class="task-desc"><?php echo $row["taskdescription"]; ?></div>
+										<div class="task-date"><?php echo $row["taskdate"]; ?></div>
+										<div class="task-button">
+											<a class="view-button" href="#popup5">
+												<button class="func-button" onclick="viewTask('<?php echo $row["taskname"]; ?>')">View</button>
+											</a>
+											<div id="popup5" class="overlay">
+												<div class="popup">
+													<h2> VIEW A TASK </h2>
+													<hr/>
+													<a class="close" href="#">&times;</a>
+													<div class="add-content">
+														<form action="#" method="post">
+															<input type="hidden" name="taskname" value="<?php echo $row["taskname"]; ?>">
+															<div class="status" id="statuschange">
+																<img src="images/starfilled.png" id="statusImage" onclick="changeImage()">
 															</div>
 															
 															<div class="field">
@@ -271,36 +371,6 @@
 							}
 						} else {
 					?>
-							<div>
-								<img src="images/notasks.png">
-							</div>
-							<div>
-								<span> There are currently no newly created task/s as of the moment. </span>
-							</div>
-					<?php
-						}
-					?>
-
-					</div>
-                </div>
-                   
-                <input type="radio" id="important-tab" name="sec-a">
-                <label for="important-tab" class="section-important">
-                    <div>
-                        <img src="images/important.png">
-                    </div>
-                       
-                    <div>
-                        <span> Important Tasks </span>
-                    </div>
-                </label>
-                <div class="all-content">
-                    <div class="section-header">
-                        <h2> IMPORTANT TASKS </h2>
-                        <h5> Sorted by: Newest to Oldest </h5>
-                    </div>
-                    <hr/>
-                    <div class="no-alltasks">
                         <div>
                             <img src="images/nofav.png">
                         </div>
@@ -309,6 +379,9 @@
 
                             <span> There are currently no newly important<br/>task/s as of the moment. </span>
                         </div>
+					<?php
+						}
+					?>
                     </div>
                 </div>
                    
@@ -331,7 +404,7 @@
                     <div class="no-alltasks">
                         <div class="deleted-content">
                     <?php
-                    $sql = "SELECT * FROM tbltaskdeleted ORDER BY deleted_date DESC";
+                    $sql = "SELECT * FROM tbltaskdeleted WHERE is_active=1 ORDER BY deleted_date DESC";
                     $result = mysqli_query($connection, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -344,7 +417,7 @@
                                     <td class="task-date"><?php echo $row["taskdate"]; ?></td>
                                     <td class="task-button">
 										<a class="view-button" href="#popup9">
-											<a href="restore-task.php?taskName=<?php echo urlencode($row["taskname"]); ?>" class="func-button">
+											<a href="restore-task.php?taskName=<?php echo urlencode($row["taskname"]); ?>" class="func-button" onclick="if (!confirm('Are you sure?')) { return false }">
 											                <button class="func-button"> Restore </button>
 										</a>
 
@@ -440,6 +513,8 @@
             </script>";
  
 	if (isset($_POST['btnCreate'])) {
+		$important = $_POST['important'];
+     
 		$taskname = mysqli_real_escape_string($connection, $_POST['taskname']);
 		$taskdescription = mysqli_real_escape_string($connection, $_POST['taskdescription']);
 		$taskdate = mysqli_real_escape_string($connection, $_POST['taskdate']);
@@ -449,24 +524,34 @@
 		if (mysqli_num_rows($checkResult) > 0) {
 			echo "<script>alert('Task name already exists. Please choose a different name.');</script>";
 		} else {
-			$sql = "Insert into tblTask(taskname, taskdescription, taskdate) values('$taskname', '$taskdescription', '$taskdate')";
+            if(isset($important)){
+    			$sql = "Insert into tblTask(taskname, taskdescription, taskdate, isimportant) values('$taskname', '$taskdescription', '$taskdate','$important')";
 			mysqli_query($connection, $sql);
             echo $create_success;
+            }else{
+                $sql = "Insert into tblTask(taskname, taskdescription, taskdate,isimportant) values('$taskname', '$taskdescription', '$taskdate','$imporant')";
+                mysqli_query($connection, $sql);
+                echo $create_success;
+            }
 		}
 	}
 ?>
 
+
+
 <?php
 	if (isset($_POST['btnUpdate'])) {
+		$taskID = $_POST['taskID'];
 		$taskname = $_POST['taskname'];
 		$taskdate = $_POST['taskdate'];
 		$taskdescription = $_POST['taskdescription'];
-		$sql = "UPDATE tbltask SET taskname='$taskname', taskdate='$taskdate', taskdescription='$taskdescription'";
+		
+		$sql = "UPDATE tbltask SET taskname='$taskname', taskdate='$taskdate', taskdescription='$taskdescription' WHERE taskname='$taskname'";
 		$result = mysqli_query($connection, $sql);
 		if ($result) {
 			echo $update_success;
 		} else {
-			echo "Error updating task: " . mysqli_error($connection);
+			echo "Error updating task: ". mysqli_error($connection);
 		}
 	}
 ?>
@@ -480,13 +565,14 @@
 	});
   
 	function changeImage() {
-      var statusImage = document.getElementById("statusImage");
-      if (statusImage.src.includes("starhollow.png")) {
+    var statusImage = document.getElementById("statusImage");
+    var importantInput = document.getElementById("importantInput");
+    if (statusImage.src.includes("starhollow.png")) {
         statusImage.src = "images/starfilled.png";
-        saveToImportantTasks(statusImage);
-      } else {
+        importantInput.value = "1";
+    } else {
         statusImage.src = "images/starhollow.png";
-      }
-    }
+        importantInput.value = "0";
+    	}
+	}
 </script>
-

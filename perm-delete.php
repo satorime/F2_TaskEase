@@ -1,17 +1,17 @@
 <?php
 include 'connect.php';
- 
-    $taskName = $_GET['taskName'];
- 
-    $sql = "DELETE FROM tbltaskdeleted WHERE taskname='$taskName'";
-    $result = mysqli_query($connection, $sql);
- 
-    if ($result) {
-        echo "Task deleted successfully!";
-    } else {
-        echo "Error deleting task: " . mysqli_error($connection);
-    }
- 
-    header('Location: dashboard.php');
-    exit;
+
+$taskName = $_GET['taskName'];
+
+$sql = "UPDATE tbltaskdeleted SET is_active = 0 WHERE taskname='$taskName'";
+$result = mysqli_query($connection, $sql);
+
+if ($result) {
+    echo "Task deactivated successfully!";
+} else {
+    echo "Error deactivating task: ". mysqli_error($connection);
+}
+
+header('Location: dashboard.php');
+exit;
 ?>
