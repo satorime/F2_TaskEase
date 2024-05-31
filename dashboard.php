@@ -236,7 +236,11 @@
 															<input type="hidden" name="taskID" value="<?php echo $row["taskID"]; ?>">
 															
 															<div class="status" id="statuschange">
-																<img src="images/starhollow.png" id="statusImage" onclick="changeImage()">
+																<?php if ($row["isimportant"] == 1) {?>
+																	<img src="images/starfilled.png" id="statusImage" onclick="changeImage()">
+																<?php } else {?>
+																	<img src="images/starhollow.png" id="statusImage" onclick="changeImage()">
+																<?php }?>
 															</div>
 															
 															<div class="field">
