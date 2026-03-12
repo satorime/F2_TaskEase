@@ -1,5 +1,6 @@
 <?php
-	include 'connect.php';
+ob_start();
+include 'connect.php';
 ?>
 
 <html lang="en" dir="ltr">
@@ -63,12 +64,12 @@
 
 						<div class="input-box">
 							<span class="details"> Password </span>
-							<input type="text" name = "password" placeholder="Enter your password" required>
+							<input type="password" name = "password" placeholder="Enter your password" required>
 						</div>
 
 						<div class="input-box">
 							<span class="details"> Confirm Password </span>
-							<input type="text" name = "confirmpassword" placeholder="Confirm your password" required>
+							<input type="password" name = "confirmpassword" placeholder="Confirm your password" required>
 						</div>
 					</div>
 
