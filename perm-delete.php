@@ -3,13 +3,12 @@ include 'connect.php';
 
 $taskName = $_GET['taskName'];
 
-$sql = "UPDATE tbltaskdeleted SET is_active = 0 WHERE taskname='$taskName'";
-$result = mysqli_query($connection, $sql);
+// Permanently hide the task by marking it inactive
+$stmt = $pdo->prepare("UPDATE tbltaskdeleted SET is_active = 0 WHERE taskname = :taskname");
+$result = $stmt->execute([':taskname' => $taskName]);
 
-if ($result) {
-    echo "Task deactivated successfully!";
-} else {
-    echo "Error deactivating task: ". mysqli_error($connection);
+if (!$result) {
+    echo "Error deactivating task.";
 }
 
 header('Location: dashboard.php');

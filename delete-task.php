@@ -3,13 +3,16 @@ include 'connect.php';
 
 $taskName = $_GET['taskName'];
 
-$sql = "INSERT INTO tbltaskdeleted (taskname, taskdescription, taskdate)
-        SELECT taskname, taskdescription, taskdate FROM tblTask WHERE taskname = '$taskName'";
+// Copy task to deleted table
+$stmt = $pdo->prepare(
+    "INSERT INTO tbltaskdeleted (taskname, taskdescription, taskdate)
+     SELECT taskname, taskdescription, taskdate FROM tbltask WHERE taskname = :taskname"
+);
+$stmt->execute([':taskname' => $taskName]);
 
-mysqli_query($connection, $sql);
-
-$sql = "DELETE FROM tblTask WHERE taskname = '$taskName'";
-mysqli_query($connection, $sql);
+// Remove from active tasks
+$stmt = $pdo->prepare("DELETE FROM tbltask WHERE taskname = :taskname");
+$stmt->execute([':taskname' => $taskName]);
 
 header('Location: dashboard.php');
 exit;

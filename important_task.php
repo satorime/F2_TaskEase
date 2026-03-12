@@ -1,12 +1,19 @@
 <?php
 include 'connect.php';
 
-$taskname = $_POST['taskname'];
-$taskdate = $_POST['taskdate'];
+$taskname        = $_POST['taskname'];
+$taskdate        = $_POST['taskdate'];
 $taskdescription = $_POST['taskdescription'];
 
-$sql = "INSERT into tblimportanttask(taskname, taskdescription, taskdate) values('$taskname', '$taskdescription', '$taskdate')";
-mysqli_query($connection, $sql);
+$stmt = $pdo->prepare(
+    "INSERT INTO tblimportanttask (taskname, taskdescription, taskdate)
+     VALUES (:taskname, :taskdescription, :taskdate)"
+);
+$stmt->execute([
+    ':taskname'        => $taskname,
+    ':taskdescription' => $taskdescription,
+    ':taskdate'        => $taskdate,
+]);
 
 echo "Task marked as important.";
 ?>
