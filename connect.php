@@ -11,16 +11,17 @@
 // ============================================================
 
 // Credentials are read from environment variables (set these in Render dashboard).
-// For local testing, you can set them in your shell or replace getenv() with the raw values.
-$db_host     = getenv('DB_HOST');     // e.g. db.abcdefghijklmn.supabase.co
-$db_port     = '5432';
+// Use the Supabase Connection Pooler (IPv4, port 6543) to avoid IPv6 issues.
+// Find these in: Supabase Dashboard → Project Settings → Database → Connection Pooling
+$db_host     = getenv('DB_HOST');
+$db_port     = '6543';
 $db_name     = 'postgres';
-$db_user     = 'postgres';
+$db_user     = getenv('DB_USER');
 $db_password = getenv('DB_PASSWORD');
 
 try {
     $pdo = new PDO(
-        "pgsql:host=$db_host;port=$db_port;dbname=$db_name",
+        "pgsql:host=$db_host;port=$db_port;dbname=$db_name;sslmode=require",
         $db_user,
         $db_password,
         [
