@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'connect.php';
 
 $taskName = $_GET['taskName'];

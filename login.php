@@ -1,5 +1,6 @@
 <?php
-	include 'connect.php';
+ob_start();
+include 'connect.php';
 ?>
 
 <html lang="en" dir="ltr">
