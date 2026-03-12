@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: taskease
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_HOST
+        value: db.nhgbrxraowxaasrisztk.supabase.co
+      - key: DB_PASSWORD
+        sync: false   # Set this manually in the Render dashboard

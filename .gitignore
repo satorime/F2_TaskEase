@@ -1,5 +1,4 @@
 # Sensitive config files
-render.yaml
 connect.php
 
 # Test/debug files
