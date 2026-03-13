@@ -1,70 +1,78 @@
 <?php
-	include 'connect.php';
+ob_start();
+include 'connect.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TaskEase — Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/hand-drawn.css">
+  <script src="js/redirect-pages.js"></script>
+  <script src="js/format-pages.js"></script>
+</head>
+<body>
 
-<html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title> Task Ease - Home</title>
-		<link rel="stylesheet" href="css/index.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap">
-		<script src="js/redirect-pages.js"></script>
-		<script src="js/format-pages.js"></script>
-		<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-	</head>
-   
-	<body>
-		<div class="page-header">
-			<div class="header-logo">
-				<img src = "images/taskeaseLogo2.png" />
-			</div>
-					
-			<div class="header-logo-name">
-				<div class="name-upper-text">
-					<span> TaskEase </span>
-				</div>
-					
-				<div class="name-lower-text">
-					<span> task managemen</span>t
-				</div>
-			</div>
-				
-			<div class="header-anchors" onclick="redirectToIndex();">
-				<span> HOME </span>
-			</div>
-				
-			<div class="header-anchors" onclick="redirectToAboutus();">
-				<span> ABOUT US </span>
-			</div>
-					
-			<div class="header-anchors" onclick="redirectToContactus();">
-				<span> CONTACT US </span>
-			</div>
-										
-			<div class="header-anchors" onclick="redirectToLogin();">
-				<span> LOG IN </span>
-			</div>
-					
-			<div class="header-anchors" onclick="redirectToRegister();">
-				<span> SIGN IN </span>
-			</div>
-		</div>
-		
-		<div class="index-body">
-			<div class="index-body-image">
-				<img src = "images/taskease-img1.jpg"/>
-			</div>
-			
-			<div class="index-body-text">
-				<div class="text-welcome">
-					<span> Welcome to TaskEase! </span>
-				</div>
-				
-				<div class="text-welcome-content">
-					<span> Simplify your task effortlessly. Get organized, stay <br/>productive. Let's make task tracking easy together! </span>
-				</div>
-			</div>
-		</div>
-		
-	</body>
+  <nav class="navbar">
+    <div class="navbar-brand" onclick="redirectToIndex()">
+      <img src="images/taskeaseLogo2.png" alt="TaskEase">
+      <span class="navbar-brand-name">TaskEase</span>
+    </div>
+    <div class="navbar-links">
+      <span class="nav-link primary" onclick="redirectToIndex()">Home</span>
+      <span class="nav-link" onclick="redirectToAboutus()">About Us</span>
+      <span class="nav-link" onclick="redirectToContactus()">Contact Us</span>
+      <span class="nav-link" onclick="redirectToLogin()">Log In</span>
+      <span class="nav-link primary" onclick="redirectToRegister()">Sign Up →</span>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-tag">📋 Your personal task manager</div>
+      <h1 class="hero-title">
+        Get things<br>
+        <span class="accent">done!</span>
+      </h1>
+      <p class="hero-subtitle">
+        Simplify your tasks effortlessly. Stay organized,<br>
+        stay productive — the human way.
+      </p>
+      <div class="hero-cta">
+        <span class="btn btn-primary" onclick="redirectToRegister()">Get Started →</span>
+        <span class="btn" onclick="redirectToLogin()">Log In</span>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/taskease-img1.jpg" alt="TaskEase preview">
+    </div>
+  </section>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <div class="feature-title">Track Tasks</div>
+      <div class="feature-desc">Create, update, and complete tasks with ease.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⭐</div>
+      <div class="feature-title">Mark Important</div>
+      <div class="feature-desc">Star the tasks that need your attention first.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗑️</div>
+      <div class="feature-title">Trash & Restore</div>
+      <div class="feature-desc">Deleted tasks go to the bin — restore anytime.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Reports</div>
+      <div class="feature-desc">See your task stats and stay on top of things.</div>
+    </div>
+  </div>
+
+</body>
 </html>

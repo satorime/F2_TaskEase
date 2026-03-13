@@ -2,153 +2,138 @@
 ob_start();
 include 'connect.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TaskEase — Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/hand-drawn.css">
+  <script src="js/redirect-pages.js"></script>
+</head>
+<body>
 
-<html lang="en" dir="ltr">
-	<head>
-		<meta charset = "UTF-8">
-		<title> Task Ease - Register</title>
-		<link rel="stylesheet" href="css/registerCSS.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap">
-		<script src="js/redirect-pages.js"></script>
-		<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-	</head>
+  <nav class="navbar">
+    <div class="navbar-brand" onclick="redirectToIndex()">
+      <img src="images/taskeaseLogo2.png" alt="TaskEase">
+      <span class="navbar-brand-name">TaskEase</span>
+    </div>
+    <div class="navbar-links">
+      <span class="nav-link" onclick="redirectToIndex()">Home</span>
+      <span class="nav-link" onclick="redirectToAboutus()">About Us</span>
+      <span class="nav-link" onclick="redirectToLogin()">Log In</span>
+    </div>
+  </nav>
 
-	<body>
-		<div class="page-header">
-			<div class="header-home" onclick="redirectToIndex();">
-				<div class="header-logo">
-					<img src = "images/taskeaseLogo2.png" />
-				</div>
+  <div class="auth-page">
+    <div class="auth-card" style="max-width:500px;">
+      <div class="auth-tape"></div>
 
-				<div class="header-logo-name">
-					<div class="name-upper-text">
-						<span> TaskEase </span>
-					</div>
+      <h1 class="auth-title">Join TaskEase ✏️</h1>
+      <p class="auth-subtitle">Create your free account</p>
 
-					<div class="name-lower-text">
-						<span> task managemen</span>t
-					</div>
-				</div>
-			</div>
+      <?php
+      if (isset($_POST['btnRegister'])) {
+        $firstname        = $_POST['firstname'];
+        $lastname         = $_POST['lastname'];
+        $username         = $_POST['username'];
+        $email            = $_POST['emailadd'];
+        $password         = $_POST['password'];
+        $confirmedpassword = $_POST['confirmpassword'];
 
-			<div class="header-identifier">
-				<span> REGISTER </span>
-			</div>
-		</div>
+        if ($password != $confirmedpassword) {
+          echo '<div class="auth-error">⚠️ Passwords do not match.</div>';
+        } else {
+          $stmt = $pdo->prepare("SELECT COUNT(*) FROM tbluseraccount WHERE username = :username");
+          $stmt->execute([':username' => $username]);
+          $user_row = $stmt->fetchColumn();
 
-		<div class="register-body">
-			<div class="body-header"> Registration </div>
+          $stmt = $pdo->prepare("SELECT COUNT(*) FROM tbluseraccount WHERE emailadd = :emailadd");
+          $stmt->execute([':emailadd' => $email]);
+          $email_row = $stmt->fetchColumn();
 
-			<div class="body-content">
-				<form action="#" method="post">
-					<div class="user-details">
-						<div class="input-box">
-							<span class="details"> First Name </span>
-							<input type="text" name = "firstname" placeholder="Enter your first name" required>
-						</div>
+          if ($user_row == 0 && $email_row == 0) {
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-						<div class="input-box">
-							<span class="details">Last Name </span>
-							<input type="text" name = "lastname" placeholder="Enter your last name" required>
-						</div>
+            $stmt = $pdo->prepare(
+              "INSERT INTO tbluseraccount (username, emailadd, password)
+               VALUES (:username, :emailadd, :password)
+               RETURNING acctid"
+            );
+            $stmt->execute([
+              ':username' => $username,
+              ':emailadd' => $email,
+              ':password' => $hashed_password,
+            ]);
+            $acctid = $stmt->fetchColumn();
 
-						<div class="input-box">
-							<span class="details"> Username </span>
-							<input type="text" name = "username" placeholder="Enter your username" required>
-						</div>
+            $stmt = $pdo->prepare(
+              "INSERT INTO tbluserprofile (firstname, lastname, acctid)
+               VALUES (:firstname, :lastname, :acctid)"
+            );
+            $stmt->execute([
+              ':firstname' => $firstname,
+              ':lastname'  => $lastname,
+              ':acctid'    => $acctid,
+            ]);
 
-						<div class="input-box">
-							<span class="details"> Email </span>
-							<input type="text" name = "emailadd" placeholder="Enter your email" required>
-						</div>
+            $_SESSION['success'] = "Registration successful.";
+            header('location: login.php');
+            exit;
+          } else {
+            if ($user_row != 0) {
+              echo '<div class="auth-error">⚠️ Username already exists.</div>';
+            } else {
+              echo '<div class="auth-error">⚠️ Email already exists.</div>';
+            }
+          }
+        }
+      }
+      ?>
 
-						<div class="input-box">
-							<span class="details"> Password </span>
-							<input type="password" name = "password" placeholder="Enter your password" required>
-						</div>
+      <form method="post" action="#">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 1rem;">
+          <div class="field-wrap">
+            <label>First Name</label>
+            <input class="input-field" type="text" name="firstname" placeholder="Juan" required>
+          </div>
+          <div class="field-wrap">
+            <label>Last Name</label>
+            <input class="input-field" type="text" name="lastname" placeholder="Dela Cruz" required>
+          </div>
+        </div>
 
-						<div class="input-box">
-							<span class="details"> Confirm Password </span>
-							<input type="password" name = "confirmpassword" placeholder="Confirm your password" required>
-						</div>
-					</div>
+        <div class="field-wrap">
+          <label>Username</label>
+          <input class="input-field" type="text" name="username" placeholder="choose a username" required>
+        </div>
 
-					<div class="register-button">
-						<input type="submit" name="btnRegister" value="Register">
-					</div>
-				</form>
+        <div class="field-wrap">
+          <label>Email</label>
+          <input class="input-field" type="text" name="emailadd" placeholder="you@email.com" required>
+        </div>
 
-				<div class="login-link">
-					<span> Already have an account? <a href="login.php"> Login now </a> </span>
-				</div>
-			</div>
-		</div>
+        <div class="field-wrap">
+          <label>Password</label>
+          <input class="input-field" type="password" name="password" placeholder="••••••••" required>
+        </div>
 
-<?php
-    if (isset($_POST['btnRegister'])) {
-		$firstname        = $_POST['firstname'];
-		$lastname         = $_POST['lastname'];
-		$username         = $_POST['username'];
-		$email            = $_POST['emailadd'];
-		$password         = $_POST['password'];
-		$confirmedpassword = $_POST['confirmpassword'];
+        <div class="field-wrap">
+          <label>Confirm Password</label>
+          <input class="input-field" type="password" name="confirmpassword" placeholder="••••••••" required>
+        </div>
 
-		// Check if the passwords match
-		if ($password != $confirmedpassword) {
-			echo "Passwords do not match.";
-		} else {
-			// Check if username already exists
-			$stmt = $pdo->prepare("SELECT COUNT(*) FROM tbluseraccount WHERE username = :username");
-			$stmt->execute([':username' => $username]);
-			$user_row = $stmt->fetchColumn();
+        <button class="btn btn-primary" type="submit" name="btnRegister"
+          style="width:100%; margin-top:0.5rem;">
+          Create Account →
+        </button>
+      </form>
 
-			// Check if email already exists
-			$stmt = $pdo->prepare("SELECT COUNT(*) FROM tbluseraccount WHERE emailadd = :emailadd");
-			$stmt->execute([':emailadd' => $email]);
-			$email_row = $stmt->fetchColumn();
+      <p class="auth-footer">
+        Already have an account? <a href="login.php">Log in</a>
+      </p>
+    </div>
+  </div>
 
-			if ($user_row == 0 && $email_row == 0) {
-				// Save data to tbluseraccount
-				$hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-				$stmt = $pdo->prepare(
-					"INSERT INTO tbluseraccount (username, emailadd, password)
-					 VALUES (:username, :emailadd, :password)
-					 RETURNING acctid"
-				);
-				$stmt->execute([
-					':username' => $username,
-					':emailadd' => $email,
-					':password' => $hashed_password,
-				]);
-				$acctid = $stmt->fetchColumn();
-
-				// Save data to tbluserprofile with the acctid foreign key
-				$stmt = $pdo->prepare(
-					"INSERT INTO tbluserprofile (firstname, lastname, acctid)
-					 VALUES (:firstname, :lastname, :acctid)"
-				);
-				$stmt->execute([
-					':firstname' => $firstname,
-					':lastname'  => $lastname,
-					':acctid'    => $acctid,
-				]);
-
-				$_SESSION['success'] = "Registration successful.";
-				header('location: login.php');
-				exit;
-			} else {
-				if ($user_row != 0) {
-					echo "Username already exists.";
-				} else {
-					echo "Email already exists.";
-				}
-			}
-		}
-	}
-?>
-
-
-	</body>
-
+</body>
 </html>

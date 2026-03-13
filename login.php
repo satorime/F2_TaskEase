@@ -2,97 +2,79 @@
 ob_start();
 include 'connect.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TaskEase — Log In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/hand-drawn.css">
+  <script src="js/redirect-pages.js"></script>
+</head>
+<body>
 
-<html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<title> Task Ease - Log In</title>
-		<link rel="stylesheet" href="css/loginCSS.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap">
-		<script src="js/redirect-pages.js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
+  <nav class="navbar">
+    <div class="navbar-brand" onclick="redirectToIndex()">
+      <img src="images/taskeaseLogo2.png" alt="TaskEase">
+      <span class="navbar-brand-name">TaskEase</span>
+    </div>
+    <div class="navbar-links">
+      <span class="nav-link" onclick="redirectToIndex()">Home</span>
+      <span class="nav-link" onclick="redirectToAboutus()">About Us</span>
+      <span class="nav-link" onclick="redirectToRegister()">Sign Up</span>
+    </div>
+  </nav>
 
-	<body>
-		<div class="page-header">
-			<div class="header-home" onclick="redirectToIndex();">
-				<div class="header-logo">
-					<img src = "images/taskeaseLogo2.png" />
-				</div>
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-tape"></div>
 
-				<div class="header-logo-name">
-					<div class="name-upper-text">
-						<span> TaskEase </span>
-					</div>
+      <h1 class="auth-title">Welcome back ✏️</h1>
+      <p class="auth-subtitle">stylish tasks, the new norm</p>
 
-					<div class="name-lower-text">
-						<span> task managemen</span>t
-					</div>
-				</div>
-			</div>
+      <?php
+      if (isset($_POST['btnLogin'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-			<div class="header-identifier">
-				<span> LOG IN</span>
-			</div>
-		</div>
+        $stmt = $pdo->prepare("SELECT * FROM tbluseraccount WHERE username = :username");
+        $stmt->execute([':username' => $username]);
+        $row = $stmt->fetch();
 
-		<div class="login-body">
-			<div class="login-body-content">
-				<div class="content-header">
-					<span class="header-welcome"> Welcome</span> <br/>
-					<span class="header-text"> stylish tasks, the new norm</span>
-				</div>
+        if (!$row) {
+          echo '<div class="auth-error">⚠️ Username not found.</div>';
+        } elseif (!password_verify($password, $row['password'])) {
+          echo '<div class="auth-error">⚠️ Incorrect password.</div>';
+        } else {
+          $_SESSION['username'] = $row['username'];
+          header("location: dashboard.php");
+          exit;
+        }
+      }
+      ?>
 
-				<form action="#" method="post">
-					<div class="field">
-						<input type="text" name = "username" required>
-						<label>Username</label>
-					</div>
+      <form method="post" action="#">
+        <div class="field-wrap">
+          <label>Username</label>
+          <input class="input-field" type="text" name="username" placeholder="your username" required>
+        </div>
 
-					<div class="field">
-						<input type="password" name = "password" required>
-						<label>Password</label>
-					</div>
+        <div class="field-wrap">
+          <label>Password</label>
+          <input class="input-field" type="password" name="password" placeholder="••••••••" required>
+        </div>
 
-					<div class="field">
-						<input type="submit" name = "btnLogin" value="Login">
-					</div>
+        <button class="btn btn-primary" type="submit" name="btnLogin"
+          style="width:100%; margin-top:0.5rem;">
+          Log In →
+        </button>
+      </form>
 
-					<div class="signup-link">
-						Not a member? <a href="register.php"> Signup now</a>
-					</div>
-				 </form>
-			 </div>
+      <p class="auth-footer">
+        Not a member? <a href="register.php">Sign up now</a>
+      </p>
+    </div>
+  </div>
 
-			 <div class="login-body-img">
-				<img src="images/taskease-img2.jpg">
-			 </div>
-		</div>
-
-		<?php
-	if (isset($_POST['btnLogin'])) {
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-
-		// Check tbluseraccount if username exists
-		$stmt = $pdo->prepare("SELECT * FROM tbluseraccount WHERE username = :username");
-		$stmt->execute([':username' => $username]);
-		$row = $stmt->fetch();
-
-		if (!$row) {
-			echo "Username not exists.";
-		} else {
-			// Verify password
-			if (password_verify($password, $row['password'])) {
-				$_SESSION['username'] = $row['username'];
-				header("location: dashboard.php");
-				exit;
-			} else {
-				echo "Incorrect password";
-			}
-		}
-	}
-?>
-	</body>
-
+</body>
 </html>
