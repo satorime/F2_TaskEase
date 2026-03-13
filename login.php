@@ -15,7 +15,7 @@ include 'connect.php';
 
   <nav class="navbar">
     <div class="navbar-brand" onclick="redirectToIndex()">
-      <img src="images/taskeaseLogo2.png" alt="TaskEase">
+      <img src="images/logo.svg" alt="TaskEase">
       <span class="navbar-brand-name">TaskEase</span>
     </div>
     <div class="navbar-links">
@@ -61,7 +61,10 @@ include 'connect.php';
 
         <div class="field-wrap">
           <label>Password</label>
-          <input class="input-field" type="password" name="password" placeholder="••••••••" required>
+          <div class="pw-wrap">
+            <input class="input-field" type="password" id="pw-login" name="password" placeholder="••••••••" required>
+            <button type="button" class="pw-toggle" onclick="togglePw('pw-login', this)" title="Show/hide">👁</button>
+          </div>
         </div>
 
         <button class="btn btn-primary" type="submit" name="btnLogin"
@@ -76,5 +79,17 @@ include 'connect.php';
     </div>
   </div>
 
+<script>
+function togglePw(id, btn) {
+  var inp = document.getElementById(id);
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    inp.type = 'password';
+    btn.textContent = '👁';
+  }
+}
+</script>
 </body>
 </html>

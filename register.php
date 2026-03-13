@@ -15,7 +15,7 @@ include 'connect.php';
 
   <nav class="navbar">
     <div class="navbar-brand" onclick="redirectToIndex()">
-      <img src="images/taskeaseLogo2.png" alt="TaskEase">
+      <img src="images/logo.svg" alt="TaskEase">
       <span class="navbar-brand-name">TaskEase</span>
     </div>
     <div class="navbar-links">
@@ -34,8 +34,8 @@ include 'connect.php';
 
       <?php
       if (isset($_POST['btnRegister'])) {
-        $firstname        = $_POST['firstname'];
-        $lastname         = $_POST['lastname'];
+        $firstname        = '';
+        $lastname         = '';
         $username         = $_POST['username'];
         $email            = $_POST['emailadd'];
         $password         = $_POST['password'];
@@ -92,17 +92,6 @@ include 'connect.php';
       ?>
 
       <form method="post" action="#">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 1rem;">
-          <div class="field-wrap">
-            <label>First Name</label>
-            <input class="input-field" type="text" name="firstname" placeholder="Juan" required>
-          </div>
-          <div class="field-wrap">
-            <label>Last Name</label>
-            <input class="input-field" type="text" name="lastname" placeholder="Dela Cruz" required>
-          </div>
-        </div>
-
         <div class="field-wrap">
           <label>Username</label>
           <input class="input-field" type="text" name="username" placeholder="choose a username" required>
@@ -115,12 +104,18 @@ include 'connect.php';
 
         <div class="field-wrap">
           <label>Password</label>
-          <input class="input-field" type="password" name="password" placeholder="••••••••" required>
+          <div class="pw-wrap">
+            <input class="input-field" type="password" id="pw-reg" name="password" placeholder="••••••••" required>
+            <button type="button" class="pw-toggle" onclick="togglePw('pw-reg', this)" title="Show/hide">👁</button>
+          </div>
         </div>
 
         <div class="field-wrap">
           <label>Confirm Password</label>
-          <input class="input-field" type="password" name="confirmpassword" placeholder="••••••••" required>
+          <div class="pw-wrap">
+            <input class="input-field" type="password" id="pw-confirm" name="confirmpassword" placeholder="••••••••" required>
+            <button type="button" class="pw-toggle" onclick="togglePw('pw-confirm', this)" title="Show/hide">👁</button>
+          </div>
         </div>
 
         <button class="btn btn-primary" type="submit" name="btnRegister"
@@ -135,5 +130,17 @@ include 'connect.php';
     </div>
   </div>
 
+<script>
+function togglePw(id, btn) {
+  var inp = document.getElementById(id);
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    inp.type = 'password';
+    btn.textContent = '👁';
+  }
+}
+</script>
 </body>
 </html>

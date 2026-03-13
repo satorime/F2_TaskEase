@@ -15,7 +15,7 @@ include 'connect.php';
 
   <nav class="navbar">
     <div class="navbar-brand" onclick="redirectToIndex()">
-      <img src="images/taskeaseLogo2.png" alt="TaskEase">
+      <img src="images/logo.svg" alt="TaskEase">
       <span class="navbar-brand-name">TaskEase</span>
     </div>
     <div class="navbar-links">

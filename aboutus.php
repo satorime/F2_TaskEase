@@ -15,7 +15,7 @@ include 'connect.php';
 
   <nav class="navbar">
     <div class="navbar-brand" onclick="redirectToIndex()">
-      <img src="images/taskeaseLogo2.png" alt="TaskEase">
+      <img src="images/logo.svg" alt="TaskEase">
       <span class="navbar-brand-name">TaskEase</span>
     </div>
     <div class="navbar-links">
@@ -64,7 +64,7 @@ include 'connect.php';
         🖊️ Our Logo
       </h2>
       <div style="display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
-        <img src="images/taskeaseLogo2.png" alt="TaskEase Logo"
+        <img src="images/logo.svg" alt="TaskEase Logo"
           style="width:100px; border:2px solid var(--fg); border-radius:var(--r-wobbly-sm); box-shadow:var(--shadow-sm); padding:0.5rem; background:var(--white);">
         <p style="flex:1; min-width:200px;">
           Our logo represents clarity and focus — the two things every productive day needs.
